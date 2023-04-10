@@ -1,0 +1,41 @@
+- name: Install System Packages 2 (lua, unzip, libtool,  gettext)
+  become: true
+  package:
+    name:
+      [
+        "base-devel",
+        "git",
+        "curl",
+        "wget",
+        "lua",
+        "jq",
+        "thefuck",
+        "zip",
+        "unzip",
+        "libtool",
+        "gettext",
+      ]
+  tags:
+    - install
+    - core
+
+- name: Install i3wm and tools like ("nvim", "stow", "tmux", "dmenu" etc)
+  become: true
+  package:
+    name:
+      [
+        "i3-gaps",
+        "alacritty",
+        "picom",
+        "shutter",
+        "neovim",
+        "tmux",
+        "dmenu",
+        "screenkey",
+        "fzf",
+        "ripgrep",
+        "xclip",
+      ]
+  tags:
+    - install
+    - core

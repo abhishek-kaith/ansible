@@ -1,0 +1,57 @@
+- hosts: localhost
+  become: yes
+
+  vars:
+    user: test
+    home: "/home/{{ user }}"
+    source_key: "./.ssh/id_rsa"
+    dest_key: "/home/{{ user }}/.ssh/id_rsa"
+    zsh_plugins:
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+
+  pre_tasks:
+    - name: Update package cache
+      become: true
+      pacman:
+        update_cache: true
+      tags:
+        - install
+        - core
+
+  tasks:
+    - include_tasks: ./tasks/ssh.yml
+      tags:
+        - ssh
+        - install
+        - dotfiles
+
+    - include_tasks: ./tasks/git-setup.yml
+      tags:
+        - install
+        - git-personal
+
+    - include_tasks: ./tasks/dotfile.yml
+      tags:
+        - stow
+        - install
+        - dotfiles
+
+    - include_tasks: ./tasks/zsh.yml
+      tags:
+        - zsh
+        - install
+
+    - include_tasks: ./tasks/core.yml
+      tags:
+        - core
+        - install
+
+    - include_tasks: ./tasks/audio.yml
+      tags:
+        - audio
+        - install
+
+    - include_tasks: ./tasks/nvm.yml
+      tags:
+        - nvm

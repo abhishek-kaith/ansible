@@ -1,0 +1,43 @@
+- name: Setup Zsh for "{{ user }}"
+
+  block:
+    - name: Install Zsh
+      package:
+        name: zsh
+        state: present
+      tags:
+        - zsh
+        - install
+
+    - name: Change default shell to Zsh for "{{ user }}"
+      user:
+        name: "{{ user }}"
+        shell: /bin/zsh
+      tags:
+        - zsh
+
+    - name: Install Oh My Zsh for "{{ user }}"
+      shell: "sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+      become_user: "{{ user }}"
+      tags:
+        - zsh
+
+    - name: Install Zsh plugins for "{{ user }}"
+      git:
+        repo: "https://github.com/zsh-users/{{ item }}.git"
+        dest: "~/.oh-my-zsh/custom/plugins/{{ item }}"
+        accept_hostkey: yes
+      become_user: "{{ user }}"
+      loop: "{{ zsh_plugins }}"
+      tags:
+        - zsh
+
+    - name: Add Zsh plugins to .zshrc for "{{ user }}"
+      lineinfile:
+        path: "~/.zshrc"
+        line: "plugins=(git {{ zsh_plugins | join(' ') }})"
+        state: present
+        regexp: ^plugins=\(.*\)$
+      become_user: "{{ user }}"
+      tags:
+        - zsh

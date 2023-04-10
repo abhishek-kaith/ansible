@@ -1,0 +1,54 @@
+- name: Setup ssh for "{{ user }}"
+
+  block:
+    - name: Install Openssh
+      package:
+        name: openssh
+        state: present
+      tags:
+        - install
+        - dotfiles
+        - ssh
+
+    - name: Ensure .ssh dir exists for "{{ user }}"
+      file:
+        dest: "{{ dest_key | dirname }}"
+        mode: 0700
+        state: directory
+      become_user: "{{ user }}"
+      tags:
+        - dotfiles
+        - ssh
+
+    - name: Install ssh key private for "{{ user }}"
+      copy:
+        src: "{{ source_key }}"
+        dest: "{{ dest_key }}"
+        mode: 0600
+      become_user: "{{ user }}"
+      tags:
+        - dotfiles
+        - ssh
+
+    - name: Install ssh key pub for "{{ user }}"
+      copy:
+        src: "{{ source_key }}.pub"
+        dest: "{{ dest_key }}.pub"
+        mode: 0644
+      become_user: "{{ user }}"
+      tags:
+        - dotfiles
+        - ssh
+
+    - name: Set authorized key from file
+      authorized_key:
+        user: "{{ user }}"
+        state: present
+        key: "{{ lookup('file', item) }}"
+      with_fileglob:
+        - "{{ home }}/.ssh/*.pub"
+      become_user: "{{ user }}"
+      tags:
+        - dotfiles
+        - ssh
+

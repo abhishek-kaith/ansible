@@ -1,0 +1,14 @@
+- name: Install nvm
+  ansible.builtin.shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh |
+    bash
+  args:
+    creates: "{{ home }}/.nvm/nvm.sh"
+  become_user: "{{ user }}"
+  tags:
+    - nvm
+- name: Install Node latest lts
+  shell: source {{ home }}/.nvm/nvm.sh && nvm install --lts && nvm use --lts
+  become_user: "{{ user }}"
+  tags:
+    - nvm

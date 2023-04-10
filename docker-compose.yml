@@ -1,0 +1,9 @@
+services:
+  arch-linux:
+    build: .
+    volumes:
+      - .:/root/cdev/.:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=${DISPLAY}
+    network_mode: host
