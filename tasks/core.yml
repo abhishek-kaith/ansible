@@ -4,6 +4,14 @@
     name:
       [
         "base-devel",
+        "amd-ucode",
+        "tmux",
+        "neovim",
+        "stow",
+        "ripgrep",
+        "fzf",
+        "ntfs-3g",
+        "iwd",
         "git",
         "curl",
         "wget",
@@ -14,28 +22,77 @@
         "unzip",
         "libtool",
         "gettext",
+        "networkmanager",
       ]
   tags:
     - install
     - core
 
-- name: Install i3wm and tools like ("nvim", "stow", "tmux", "dmenu" etc)
+- name: Install  some basic tools like sway and alacritty
   become: true
   package:
     name:
       [
-        "i3-gaps",
+        "light",
+        "grim",
+        "mako",
         "alacritty",
         "picom",
-        "shutter",
-        "neovim",
-        "tmux",
-        "dmenu",
+        "sway",
+        "swaybg",
+        "swayidle",
+        "swaylock",
+        "slurp",
+        "waybar",
+        "wl-clipboard",
+        "wofi",
+        "zathura",
+        "zathura-cb",
+        "zathura-djvu",
+        "zathura-pdf-poppler",
         "screenkey",
-        "fzf",
-        "ripgrep",
-        "xclip",
+        "ranger",
+        "nautilus",
+        "network-manager-applet",
       ]
   tags:
     - install
+    - core
+
+- name: Install Useful Fonts
+  become: true
+  package:
+    name:
+      [
+        "awesome-terminal-fonts",
+        "noto-fonts",
+        "noto-fonts-cjk",
+        "noto-fonts-emoji",
+        "noto-fonts-extra",
+        "otf-font-awesome",
+        "ttf-fira-code",
+        "ttf-firacode-nerd",
+        "ttf-font-awesome",
+        "ttf-hack",
+      ]
+  tags:
+    - install
+    - ui
+    - core
+
+- name: Install icons and themes and other related tools
+  become: true
+  package:
+    name:
+      [
+        "lxappearance",
+        "kvantum",
+        "kvantum-theme-materia",
+        "materia-gtk-theme",
+        "materia-kde",
+        "papirus-icon-theme",
+      ]
+  tags:
+    - install
+    - ui
     - core
