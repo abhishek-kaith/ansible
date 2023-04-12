@@ -57,7 +57,8 @@
         "ranger",
         "nautilus",
         "network-manager-applet",
-        "firefox"
+        "firefox",
+        "feh"
       ]
   tags:
     - install
