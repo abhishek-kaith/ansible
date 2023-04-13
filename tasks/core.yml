@@ -15,6 +15,8 @@
         "git",
         "curl",
         "wget",
+        "man",
+        "tldr",
         "lua",
         "jq",
         "thefuck",
