@@ -25,3 +25,8 @@
       systemd:
         name: battery-charge-threshold
         enabled: yes
+
+    - name: Enable systemd bluetooth 
+      systemd:
+        name: bluetooth
+        enabled: yes

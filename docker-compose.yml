@@ -7,3 +7,4 @@ services:
     environment:
       - DISPLAY=${DISPLAY}
     network_mode: host
+    
