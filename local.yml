@@ -54,9 +54,10 @@
         - audio
         - install
 
-    - include_tasks: ./tasks/nvm.yml
+    - include_tasks: ./tasks/volta.yml
       tags:
-        - nvm
+        - volta
+
     - include_tasks: ./tasks/systemd.yml
       tags:
         - systemd

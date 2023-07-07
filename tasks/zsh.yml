@@ -32,12 +32,12 @@
       tags:
         - zsh
 
-    - name: Add Zsh plugins to .zshrc for "{{ user }}"
-      lineinfile:
-        path: "~/.zshrc"
-        line: "plugins=(git {{ zsh_plugins | join(' ') }})"
-        state: present
-        regexp: ^plugins=\(.*\)$
-      become_user: "{{ user }}"
-      tags:
-        - zsh
+    # - name: Add Zsh plugins to .zshrc for "{{ user }}"
+    #   lineinfile:
+    #     path: "~/.zshrc"
+    #     line: "plugins=(git {{ zsh_plugins | join(' ') }})"
+    #     state: present
+    #     regexp: ^plugins=\(.*\)$
+    #   become_user: "{{ user }}"
+    #   tags:
+    #     - zsh

@@ -1,0 +1,9 @@
+- name: Install Volta
+  ansible.builtin.shell: >
+    curl https://get.volta.sh | 
+    bash
+  args:
+    creates: "{{ home }}/.volta"
+  become_user: "{{ user }}"
+  tags:
+    - volta
