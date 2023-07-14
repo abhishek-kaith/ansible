@@ -8,6 +8,7 @@
       tags:
         - zsh
         - install
+        - dotfiles
 
     - name: Change default shell to Zsh for "{{ user }}"
       user:
@@ -16,8 +17,25 @@
       tags:
         - zsh
 
-    - name: Install Oh My Zsh for "{{ user }}"
-      shell: "sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+    - name: Remove directory .zsh if exist
+      file:
+        path: ~/.zsh 
+        state: absent
+        force: yes
+      become_user: "{{ user }}"
+      tags:
+        - zsh
+
+    - name: Create directory .zsh
+      file:
+        path: ~/.zsh
+        state: directory
+
+    - name: Install zsh pure for "{{ user }}"
+      git:
+        repo: "https://github.com/sindresorhus/pure.git"
+        dest: "~/.zsh/pure"
+        accept_hostkey: yes
       become_user: "{{ user }}"
       tags:
         - zsh
@@ -25,19 +43,9 @@
     - name: Install Zsh plugins for "{{ user }}"
       git:
         repo: "https://github.com/zsh-users/{{ item }}.git"
-        dest: "~/.oh-my-zsh/custom/plugins/{{ item }}"
+        dest: "~/.zsh/{{ item }}"
         accept_hostkey: yes
       become_user: "{{ user }}"
       loop: "{{ zsh_plugins }}"
       tags:
         - zsh
-
-    # - name: Add Zsh plugins to .zshrc for "{{ user }}"
-    #   lineinfile:
-    #     path: "~/.zshrc"
-    #     line: "plugins=(git {{ zsh_plugins | join(' ') }})"
-    #     state: present
-    #     regexp: ^plugins=\(.*\)$
-    #   become_user: "{{ user }}"
-    #   tags:
-    #     - zsh
