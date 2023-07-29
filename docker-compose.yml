@@ -4,6 +4,8 @@ services:
     volumes:
       - .:/root/cdev/.:ro
       - /tmp/.X11-unix:/tmp/.X11-unix
+    dns:
+      - 8.8.8.8
     environment:
       - DISPLAY=${DISPLAY}
     network_mode: host

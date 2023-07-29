@@ -43,16 +43,17 @@
         - zsh
         - install
 
+    - include_tasks: ./tasks/audio.yml
+      tags:
+        - audio
+        - install
+
     - include_tasks: ./tasks/core.yml
       tags:
         - core
         - ui
         - install
 
-    - include_tasks: ./tasks/audio.yml
-      tags:
-        - audio
-        - install
 
     - include_tasks: ./tasks/volta.yml
       tags:
