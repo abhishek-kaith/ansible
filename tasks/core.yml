@@ -45,6 +45,7 @@
         "alacritty",
         "picom",
         "sway",
+        "brightnessctl",
         "swaybg",
         "swayidle",
         "swaylock",
