@@ -25,7 +25,6 @@
         "libtool",
         "gettext",
         "xdg-user-dirs",
-        "xdg-desktop-portal-wlr",
         "xorg-xwayland",
         "networkmanager",
         "blueman"
@@ -34,39 +33,70 @@
     - install
     - core
 
-- name: Install  some basic tools like sway and alacritty
+- name: Install Hyprland and required packages
   become: true
   package:
     name:
       [
-        "light",
-        "grim",
-        "mako",
+        "hyprland",
+        "hyprpaper",
+        "xdg-desktop-portal-hyprland",
+        "kitty",
         "alacritty",
-        "picom",
-        "sway",
-        "brightnessctl",
-        "swaybg",
-        "swayidle",
-        "swaylock",
-        "slurp",
-        "waybar",
-        "wl-clipboard",
+        "pamixer",
         "wofi",
+        "brightnessctl",
+        "wl-clipboard",
+        "slurp",
+        "grim",
         "zathura",
         "zathura-cb",
         "zathura-djvu",
         "zathura-pdf-poppler",
         "screenkey",
-        "ranger",
-        "nautilus",
         "network-manager-applet",
-        "firefox",
-        "feh"
+        "polkit-gnome",
+        "nautilus",
+        "firefox"
       ]
   tags:
     - install
     - core
+
+# - name: Install  some basic tools like sway and alacritty
+#   become: true
+#   package:
+#     name:
+#       [
+#         "light",
+#         "xdg-desktop-portal-wlr",
+#         "grim",
+#         "mako",
+#         "alacritty",
+#         "picom",
+#         "sway",
+#         "brightnessctl",
+#         "swaybg",
+#         "swayidle",
+#         "swaylock",
+#         "slurp",
+#         "waybar",
+#         "wl-clipboard",
+#         "wofi",
+#         "zathura",
+#         "zathura-cb",
+#         "zathura-djvu",
+#         "zathura-pdf-poppler",
+#         "screenkey",
+#         "ranger",
+#         "nautilus",
+#         "network-manager-applet",
+#         "firefox",
+#         "feh"
+#       ]
+#   tags:
+#     - install
+#     - core
 
 - name: Install Useful Fonts
   become: true
