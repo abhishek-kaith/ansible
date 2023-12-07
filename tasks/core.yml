@@ -26,6 +26,7 @@
         "gettext",
         "xdg-user-dirs",
         "xorg-xwayland",
+        "qt5-wayland",
         "networkmanager",
         "blueman"
       ]
@@ -43,6 +44,7 @@
         "xdg-desktop-portal-hyprland",
         "kitty",
         "alacritty",
+        "waybar",
         "pamixer",
         "wofi",
         "brightnessctl",
