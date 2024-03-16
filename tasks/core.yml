@@ -28,7 +28,7 @@
         "xorg-xwayland",
         "qt5-wayland",
         "networkmanager",
-        "blueman"
+        "blueman",
       ]
   tags:
     - install
@@ -59,7 +59,7 @@
         "network-manager-applet",
         "polkit-gnome",
         "nautilus",
-        "firefox"
+        "firefox",
       ]
   tags:
     - install
@@ -115,7 +115,7 @@
         "ttf-firacode-nerd",
         "ttf-font-awesome",
         "ttf-hack",
-        "ttf-jetbrains-mono", 
+        "ttf-jetbrains-mono",
         "ttf-jetbrains-mono-nerd",
       ]
   tags:
@@ -126,11 +126,13 @@
 - name: Install icons and themes and other related tools
   become: true
   package:
-    name:
-      [
-        "lxappearance",
+    name: [
+        # "lxappearance",
         "kvantum",
+        "qt5ct",
+        "qt6ct",
         "kvantum-theme-materia",
+        "nwg-look",
         "materia-gtk-theme",
         "materia-kde",
         "papirus-icon-theme",
