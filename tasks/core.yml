@@ -4,7 +4,7 @@
     name:
       [
         "base-devel",
-        "amd-ucode",
+        "intel-ucode",
         "tmux",
         "neovim",
         "stow",
@@ -34,6 +34,16 @@
     - install
     - core
 
+- name: Install Useful Tools
+  become: true
+  package:
+    name: [
+      "podman"
+    ]
+  tags:
+    - install
+    - core
+
 - name: Install Hyprland and required packages
   become: true
   package:
@@ -59,46 +69,10 @@
         "network-manager-applet",
         "polkit-gnome",
         "nautilus",
-        "firefox",
       ]
   tags:
     - install
     - core
-
-# - name: Install  some basic tools like sway and alacritty
-#   become: true
-#   package:
-#     name:
-#       [
-#         "light",
-#         "xdg-desktop-portal-wlr",
-#         "grim",
-#         "mako",
-#         "alacritty",
-#         "picom",
-#         "sway",
-#         "brightnessctl",
-#         "swaybg",
-#         "swayidle",
-#         "swaylock",
-#         "slurp",
-#         "waybar",
-#         "wl-clipboard",
-#         "wofi",
-#         "zathura",
-#         "zathura-cb",
-#         "zathura-djvu",
-#         "zathura-pdf-poppler",
-#         "screenkey",
-#         "ranger",
-#         "nautilus",
-#         "network-manager-applet",
-#         "firefox",
-#         "feh"
-#       ]
-#   tags:
-#     - install
-#     - core
 
 - name: Install Useful Fonts
   become: true
