@@ -29,17 +29,11 @@
         "qt5-wayland",
         "networkmanager",
         "blueman",
+        "podman",
+        "acpi",
+        "android-tools",
+        "mitmproxy",
       ]
-  tags:
-    - install
-    - core
-
-- name: Install Useful Tools
-  become: true
-  package:
-    name: [
-      "podman"
-    ]
   tags:
     - install
     - core
@@ -69,6 +63,8 @@
         "network-manager-applet",
         "polkit-gnome",
         "nautilus",
+        "uget",
+        "vlc",
       ]
   tags:
     - install
