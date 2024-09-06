@@ -1,32 +1,42 @@
-- name: Set battery threshold 
+- name: Systemd Services 
   block:
-    - name: Create systemd service file
-      copy:
-        content: |
-          [Unit]
-          Description=Set the battery charge threshold
-          After=multi-user.target
-          StartLimitBurst=0
+    - name: Enable systemd bluetooth 
+      systemd:
+        name: bluetooth
+        enabled: yes
 
-          [Service]
-          Type=oneshot
-          Restart=on-failure
-          ExecStart=/bin/bash -c 'echo 80 > /sys/class/power_supply/BAT0/charge_control_end_threshold && echo 80 > /sys/class/power_supply/BAT1/charge_control_end_threshold'
+    - name: Enable NetworkManger 
+      systemd:
+        name: NetworkManager 
+        enabled: yes
 
-          [Install]
-          WantedBy=multi-user.target
-        dest: /etc/systemd/system/battery-charge-threshold.service
+    - name: Enable Docker 
+      systemd:
+        name: docker 
+        enabled: yes
 
     - name: Reload systemd daemon
       systemd:
         daemon_reload: yes
 
-    - name: Enable systemd service
-      systemd:
-        name: battery-charge-threshold
-        enabled: yes
 
-    - name: Enable systemd bluetooth 
-      systemd:
-        name: bluetooth
-        enabled: yes
+    # - name: Create systemd service file
+    #   copy:
+    #     content: |
+    #       [Unit]
+    #       Description=Set the battery charge threshold
+    #       After=multi-user.target
+    #       StartLimitBurst=0
+    #
+    #       [Service]
+    #       Type=oneshot
+    #       Restart=on-failure
+    #       ExecStart=/bin/bash -c 'echo 80 > /sys/class/power_supply/BAT0/charge_control_end_threshold && echo 80 > /sys/class/power_supply/BAT1/charge_control_end_threshold'
+    #
+    #       [Install]
+    #       WantedBy=multi-user.target
+    #     dest: /etc/systemd/system/battery-charge-threshold.service
+    # - name: Enable systemd service
+    #   systemd:
+    #     name: battery-charge-threshold
+    #     enabled: yes

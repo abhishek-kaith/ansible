@@ -8,8 +8,7 @@
         "pipewire-jack",
         "pipewire-pulse",
         "wireplumber",
-        "noise-suppression-for-voice",
-        "pavucontrol",
+        "noise-suppression-for-voice"
       ]
   tags:
     - install

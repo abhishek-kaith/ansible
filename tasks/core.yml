@@ -5,6 +5,7 @@
       [
         "base-devel",
         "intel-ucode",
+        "vulkan-intel",
         "tmux",
         "neovim",
         "stow",
@@ -28,43 +29,12 @@
         "xorg-xwayland",
         "qt5-wayland",
         "networkmanager",
-        "blueman",
-        "podman",
+        "bluez",
+        "bluez-utils",
+        "docker",
         "acpi",
         "android-tools",
-        "mitmproxy",
-      ]
-  tags:
-    - install
-    - core
-
-- name: Install Hyprland and required packages
-  become: true
-  package:
-    name:
-      [
-        "hyprland",
-        "hyprpaper",
-        "xdg-desktop-portal-hyprland",
-        "kitty",
-        "alacritty",
-        "waybar",
-        "pamixer",
-        "wofi",
-        "brightnessctl",
-        "wl-clipboard",
-        "slurp",
-        "grim",
-        "zathura",
-        "zathura-cb",
-        "zathura-djvu",
-        "zathura-pdf-poppler",
-        "screenkey",
-        "network-manager-applet",
-        "polkit-gnome",
-        "nautilus",
-        "uget",
-        "vlc",
+        "go"
       ]
   tags:
     - install
@@ -93,21 +63,69 @@
     - ui
     - core
 
-- name: Install icons and themes and other related tools
+- name: Install Cosmic DE 
   become: true
   package:
-    name: [
-        # "lxappearance",
-        "kvantum",
-        "qt5ct",
-        "qt6ct",
-        "kvantum-theme-materia",
-        "nwg-look",
-        "materia-gtk-theme",
-        "materia-kde",
-        "papirus-icon-theme",
+    name:
+      [
+        "cosmic",
+        "packagekit",
+        "power-profiles-daemon"
       ]
   tags:
     - install
     - ui
     - core
+
+
+# - name: Install Hyprland and required packages
+#   become: true
+#   package:
+#     name:
+#       [
+#         "hyprland",
+#         "hyprpaper",
+#         "xdg-desktop-portal-hyprland",
+#         "kitty",
+#         "alacritty",
+#         "waybar",
+#         "pamixer",
+#         "wofi",
+#         "brightnessctl",
+#         "wl-clipboard",
+#         "slurp",
+#         "grim",
+#         "zathura",
+#         "zathura-cb",
+#         "zathura-djvu",
+#         "zathura-pdf-poppler",
+#         "screenkey",
+#         "network-manager-applet",
+#         "polkit-gnome",
+#         "nautilus",
+#         "uget",
+#         "vlc",
+#       ]
+#   tags:
+#     - install
+#     - core
+
+# - name: Install icons and themes and other related tools
+#   become: true
+#   package:
+#     name: [
+#         "pavucontrol",
+#         "lxappearance",
+#         "kvantum",
+#         "qt5ct",
+#         "qt6ct",
+#         "kvantum-theme-materia",
+#         "nwg-look",
+#         "materia-gtk-theme",
+#         "materia-kde",
+#         "papirus-icon-theme",
+#       ]
+#   tags:
+#     - install
+#     - ui
+#     - core
