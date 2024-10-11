@@ -22,18 +22,16 @@
         path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
         state: touch
 
-    - name: Insert [Serivice] If not in file
-      lineinfile:
-        path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
-        line: "[Service]"
-        state: present
-     
-    - name: Add autologin to tty1 service if not already present
-      lineinfile:
-        path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
-        line: "ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin {{ user }} %I $TERM"
-        state: present
-        insertafter: "[Service]"
+    - name: Create autologin configuration file with required content
+      copy:
+        dest: /etc/systemd/system/getty@tty1.service.d/autologin.conf
+        content: |
+          [Service]
+          ExecStart=
+          ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin {{ user }} %I $TERM
+        owner: root
+        group: root
+        mode: '0644'
 
 - name: Configure Vconsole
   lineinfile:
