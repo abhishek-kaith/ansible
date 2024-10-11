@@ -1,0 +1,243 @@
+- name: Install terminus font 
+  package:
+    name:
+      [
+        "terminus-font"
+      ]
+  tags:
+    - tty
+    - system
+
+- name: Configure Vconsole
+  lineinfile:
+    dest: "/etc/vconsole.conf"
+    line: "FONT=ter-128b"
+  tags:
+    - tty
+    - system
+      
+- name: Install useful utils
+  package:
+    name:
+      [
+        "jq",
+        "tree",
+        "ripgrep",
+        "fzf",
+        "acpi",
+        "man",
+        "whois",
+        "tldr",
+        "pciutils",
+        "usbutils",
+        "iputils",
+        "dnsutils",
+        "wget",
+        "curl"
+      ]
+  tags:
+    - utils
+    - system
+
+- name: Install Wifi And Bluetooth Tools
+  package:
+    name:
+      [
+        "iwd",
+        "bluez",
+        "bluez-utils"
+      ]
+
+- name: Enable Wifi and Bluetooth 
+  block:
+    - name: Enable systemd bluetooth
+      systemd:
+        name: bluetooth
+        enabled: yes
+
+    - name: Enable Wifi Iwd 
+      systemd:
+        name: iwd 
+        enabled: yes
+
+
+- name: Setting Up Audio
+  block:
+    - name: Install pipewire
+      package:
+        name:
+          [
+            "pipewire",
+            "wireplumber",
+            "pipewire-alsa",
+            "pipewire-jack",
+            "pipewire-audio",
+            "pipewire-pulse",
+            "noise-suppression-for-voice"
+          ]
+
+
+- name: Install video drivers
+  package:
+    name:
+      [
+        "mesa",
+        "mesa-utils",
+        "vulkan-intel"
+      ]
+
+- name: Install cli applications
+  package:
+    name:
+      [ 
+        "tmux",
+        "neovim",
+        "alacritty", 
+        "htop", 
+        "fastfetch", 
+        "p7zip",
+        "pass",
+        "pass-otp"
+      ]
+
+- name: Install Fonts
+  package:
+    name:
+      [ 
+        "awesome-terminal-fonts",
+        "noto-fonts",
+        "noto-fonts-cjk",
+        "noto-fonts-emoji",
+        "noto-fonts-extra",
+        "otf-font-awesome",
+        "ttf-fira-code",
+        "ttf-firacode-nerd",
+        "ttf-font-awesome",
+        "ttf-hack",
+        "ttf-jetbrains-mono",
+        "ttf-jetbrains-mono-nerd"
+      ]
+
+- name: Install Desktop
+  package:
+    name:
+      [ 
+        "sway", 
+        "waybar",
+        "swaylock",
+        "swayidle",
+        "swaybg",
+        "wmenu",
+        "wofi",
+        "mako",
+        "pamixer",
+        "wl-clipboard",
+        "brightnessctl",
+        "xdg-user-dirs",
+        "xorg-xwayland",
+        "helvum",
+        "pavucontrol",
+        "nemo",
+        "grim",
+        "slurp",
+        "polkit-gnome"
+      ]
+
+- name: Install Aur Dektop Packages
+  kewlfft.aur.aur:
+    name: [
+      "clipman",
+      "thorium-browser-bin"
+    ] 
+    use: yay
+    state: present
+  become: yes
+  become_user: "{{ user }}" 
+
+
+- name: Install Desktop GUI Application
+  package:
+    name:
+      [
+        "firefox",
+        "uget",
+        "vlc",
+        "uget"
+      ]
+
+- name: Git Config 
+  block:
+    - name: Installing git 
+      become: true
+      package: name=git
+
+    - name: Configure Name
+      git_config:
+        name: user.email
+        scope: global
+        value: "abhishek@kaith.me"
+      become_user: "{{ user }}"
+
+    - name: Git personal setup name
+      git_config:
+        name: user.name
+        scope: global
+        value: "abhishek-kaith"
+      become_user: "{{ user }}"
+
+- name: Managing Dotfiles
+  block:
+    - name: Install stow
+      become: true
+      package: name=stow
+
+    - name: Clone if no .dotfiles
+      ansible.builtin.git:
+        repo: "https://github.com/abhishek-kaith/.dotfiles"
+        dest: "/home/{{ user }}/.dotfiles"
+        recursive: yes
+        update: yes
+        accept_hostkey: yes
+        version: main
+      become_user: "{{ user }}"
+
+    - name: Stow dotfiles
+      shell: "cd /home/{{ user }}/.dotfiles && sh install"
+      become_user: "{{ user }}"
+
+- name: Setup Shell
+  block:
+    - name: Install Zsh
+      package: 
+        name: 
+          - zsh
+    - name: Delete Dire .zsh if exists 
+      file:
+        path: /home/{{ user }}/.zsh
+        state: absent
+    - name: Create Dire .zsh
+      file:
+        path: /home/{{ user }}/.zsh
+        state: directory
+    - name: Zsh Pure github
+      git:
+        repo: https://github.com/sindresorhus/pure.git
+        dest: /home/{{ user }}/.zsh/pure
+        clone: yes
+        update: yes
+    - name: Zsh autosuggestions 
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: /home/{{ user }}/.zsh/zsh-autosuggestions
+        clone: yes
+        update: yes
+    - name: zsh-syntax-highlighting
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: /home/{{ user }}/.zsh/zsh-syntax-highlighting
+        clone: yes
+        update: yes
+    - name: set zsh as default shell
+      user:
+        name: "{{ user }}"
+        shell: /usr/bin/zsh
