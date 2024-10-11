@@ -8,6 +8,33 @@
     - tty
     - system
 
+
+- name: Getty TTY1 Setup Auto Login
+  block:
+    - name: Create required directory for getty service if it does not exist
+      file:
+        path: /etc/systemd/system/getty@tty1.service.d
+        state: directory
+        mode: '0755'
+
+    - name: Create autologin configuration file
+      file:
+        path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
+        state: touch
+
+    - name: Insert [Serivice] If not in file
+      lineinfile:
+        path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
+        line: "[Service]"
+        state: present
+     
+    - name: Add autologin to tty1 service if not already present
+      lineinfile:
+        path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
+        line: "ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin {{ user }} %I $TERM"
+        state: present
+        insertafter: "[Service]"
+
 - name: Configure Vconsole
   lineinfile:
     dest: "/etc/vconsole.conf"
@@ -147,6 +174,7 @@
   kewlfft.aur.aur:
     name: [
       "clipman",
+      "volta-bin",
       "thorium-browser-bin"
     ] 
     use: yay
