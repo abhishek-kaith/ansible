@@ -8,6 +8,15 @@
     - tty
     - system
 
+- name: Linux Zen Header
+  package:
+    name:
+      [
+        "linux-zen-headers"
+      ]
+  tags:
+    - system
+
 
 - name: Getty TTY1 Setup Auto Login
   block:
@@ -56,9 +65,14 @@
         "pciutils",
         "usbutils",
         "iputils",
+        "binutils",
         "dnsutils",
+        "ntfs-3g",
         "wget",
-        "curl"
+        "curl",
+        "tar",
+        "unzip",
+        "zip"
       ]
   tags:
     - utils
@@ -108,6 +122,8 @@
       [
         "mesa",
         "mesa-utils",
+        "libva-intel-driver",
+        "libva-mesa-driver",
         "vulkan-intel"
       ]
 
@@ -151,26 +167,36 @@
         "waybar",
         "swaylock",
         "swayidle",
+        "swayimg",
         "swaybg",
-        "wmenu",
+        "bemenu",
         "wofi",
         "mako",
         "pamixer",
         "wl-clipboard",
+        "wf-recorder",
         "brightnessctl",
         "xdg-user-dirs",
         "xorg-xwayland",
-        "helvum",
         "pavucontrol",
         "nemo",
         "grim",
         "slurp",
-        "polkit-gnome"
+        "polkit",
+        "polkit-gnome",
+        "lxappearance",
+        "materia-gtk-theme",
+        "kvantum",
+        "materia-kde",
+        "kvantum-theme-materia",
+        "xdg-desktop-portal",
+        "xdg-desktop-portal-wlr"
       ]
 
 - name: Install Aur Dektop Packages
   kewlfft.aur.aur:
     name: [
+      "pfetch",
       "clipman",
       "volta-bin",
       "thorium-browser-bin"
@@ -188,6 +214,8 @@
         "firefox",
         "uget",
         "vlc",
+        "mpv",
+        "imv",
         "uget"
       ]
 
