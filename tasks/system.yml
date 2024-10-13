@@ -214,9 +214,7 @@
         "firefox",
         "uget",
         "vlc",
-        "mpv",
-        "imv",
-        "uget"
+        "mpv"
       ]
 
 - name: Git Config 
