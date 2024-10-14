@@ -171,7 +171,7 @@
         "swaybg",
         "bemenu",
         "wofi",
-        "mako",
+        "swaync",
         "pamixer",
         "wl-clipboard",
         "wf-recorder",
@@ -184,9 +184,13 @@
         "slurp",
         "polkit",
         "polkit-gnome",
-        "lxappearance",
+        "nwg-look",
+        "papirus-icon-theme",
         "materia-gtk-theme",
+        "qt5-wayland",
+        "qt6-wayland",
         "kvantum",
+        "kvantum-qt5",
         "materia-kde",
         "kvantum-theme-materia",
         "xdg-desktop-portal",
@@ -227,7 +231,7 @@
       git_config:
         name: user.email
         scope: global
-        value: "abhishek@kaith.me"
+        value: "abhishekkaith76@gmail.com"
       become_user: "{{ user }}"
 
     - name: Git personal setup name
