@@ -9,3 +9,6 @@
     - include_tasks: ./tasks/system.yml
       tags:
         - system
+        - tty
+        - utils
+        - shell

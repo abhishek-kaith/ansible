@@ -273,33 +273,12 @@
       package: 
         name: 
           - zsh
-    - name: Delete Dire .zsh if exists 
-      file:
-        path: /home/{{ user }}/.zsh
-        state: absent
-    - name: Create Dire .zsh
-      file:
-        path: /home/{{ user }}/.zsh
-        state: directory
-    - name: Zsh Pure github
-      git:
-        repo: https://github.com/sindresorhus/pure.git
-        dest: /home/{{ user }}/.zsh/pure
-        clone: yes
-        update: yes
-    - name: Zsh autosuggestions 
-      git:
-        repo: https://github.com/zsh-users/zsh-autosuggestions.git
-        dest: /home/{{ user }}/.zsh/zsh-autosuggestions
-        clone: yes
-        update: yes
-    - name: zsh-syntax-highlighting
-      git:
-        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-        dest: /home/{{ user }}/.zsh/zsh-syntax-highlighting
-        clone: yes
-        update: yes
+          - starship
+          - zsh-autosuggestions
+          - zsh-syntax-highlighting
     - name: set zsh as default shell
       user:
         name: "{{ user }}"
         shell: /usr/bin/zsh
+  tags:
+    - shell
