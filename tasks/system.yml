@@ -134,6 +134,7 @@
         "tmux",
         "neovim",
         "alacritty", 
+        "ghostty",
         "htop", 
         "fastfetch", 
         "p7zip",
