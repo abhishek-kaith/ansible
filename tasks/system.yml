@@ -78,44 +78,6 @@
     - utils
     - system
 
-- name: Install Wifi And Bluetooth Tools
-  package:
-    name:
-      [
-        "iwd",
-        "bluez",
-        "bluez-utils"
-      ]
-
-- name: Enable Wifi and Bluetooth 
-  block:
-    - name: Enable systemd bluetooth
-      systemd:
-        name: bluetooth
-        enabled: yes
-
-    - name: Enable Wifi Iwd 
-      systemd:
-        name: iwd 
-        enabled: yes
-
-
-- name: Setting Up Audio
-  block:
-    - name: Install pipewire
-      package:
-        name:
-          [
-            "pipewire",
-            "wireplumber",
-            "pipewire-alsa",
-            "pipewire-jack",
-            "pipewire-audio",
-            "pipewire-pulse",
-            "noise-suppression-for-voice"
-          ]
-
-
 - name: Install video drivers
   package:
     name:
@@ -136,10 +98,14 @@
         "alacritty", 
         "ghostty",
         "htop", 
+        "btop",
         "fastfetch", 
         "p7zip",
         "pass",
-        "pass-otp"
+        "pass-otp",
+        "docker",
+        "docker-compose",
+        "flatpak"
       ]
 
 - name: Install Fonts
@@ -160,57 +126,13 @@
         "ttf-jetbrains-mono-nerd"
       ]
 
-- name: Install Desktop
-  package:
-    name:
-      [ 
-        "sway", 
-        "waybar",
-        "swaylock",
-        "swayidle",
-        "swayimg",
-        "swaybg",
-        "bemenu",
-        "wofi",
-        "swaync",
-        "pamixer",
-        "wl-clipboard",
-        "wf-recorder",
-        "brightnessctl",
-        "xdg-user-dirs",
-        "xorg-xwayland",
-        "pavucontrol",
-        "nemo",
-        "nemo-preview",
-        "nemo-fileroller",
-        "nemo-image-converter",
-        "gvfs",
-        "gvfs-mtp",
-        "gvfs-smb",
-        "grim",
-        "slurp",
-        "polkit",
-        "polkit-gnome",
-        "nwg-look",
-        "papirus-icon-theme",
-        "materia-gtk-theme",
-        "qt5-wayland",
-        "qt6-wayland",
-        "kvantum",
-        "kvantum-qt5",
-        "materia-kde",
-        "kvantum-theme-materia",
-        "xdg-desktop-portal",
-        "xdg-desktop-portal-wlr"
-      ]
-
 - name: Install Aur Dektop Packages
   kewlfft.aur.aur:
     name: [
       "pfetch",
-      "clipman",
       "volta-bin",
-      "thorium-browser-bin"
+      "thorium-browser-bin",
+      "zen-browser-bin"
     ] 
     use: yay
     state: present
@@ -222,7 +144,6 @@
   package:
     name:
       [
-        "firefox",
         "uget",
         "vlc",
         "mpv"
@@ -283,3 +204,84 @@
         shell: /usr/bin/zsh
   tags:
     - shell
+
+# - name: Install Wifi And Bluetooth Tools
+#   package:
+#     name:
+#       [
+#         "iwd",
+#         "bluez",
+#         "bluez-utils"
+#       ]
+#
+# - name: Enable Wifi and Bluetooth 
+#   block:
+#     - name: Enable systemd bluetooth
+#       systemd:
+#         name: bluetooth
+#         enabled: yes
+#
+#     - name: Enable Wifi Iwd 
+#       systemd:
+#         name: iwd 
+#         enabled: yes
+#
+#
+# - name: Setting Up Audio
+#   block:
+#     - name: Install pipewire
+#       package:
+#         name:
+#           [
+#             "pipewire",
+#             "wireplumber",
+#             "pipewire-alsa",
+#             "pipewire-jack",
+#             "pipewire-audio",
+#             "pipewire-pulse",
+#             "noise-suppression-for-voice"
+#           ]
+#
+# - name: Install Desktop
+#   package:
+#     name:
+#       [ 
+#         "sway", 
+#         "waybar",
+#         "swaylock",
+#         "swayidle",
+#         "swayimg",
+#         "swaybg",
+#         "bemenu",
+#         "wofi",
+#         "swaync",
+#         "pamixer",
+#         "wl-clipboard",
+#         "wf-recorder",
+#         "brightnessctl",
+#         "xdg-user-dirs",
+#         "xorg-xwayland",
+#         "pavucontrol",
+#         "nemo",
+#         "nemo-preview",
+#         "nemo-fileroller",
+#         "nemo-image-converter",
+#         "gvfs",
+#         "gvfs-mtp",
+#         "gvfs-smb",
+#         "grim",
+#         "slurp",
+#         "polkit",
+#         "polkit-gnome",
+#         "nwg-look",
+#         "papirus-icon-theme",
+#         "materia-gtk-theme",
+#         "qt5-wayland",
+#         "qt6-wayland",
+#         "kvantum",
+#         "kvantum-qt5",
+#         "materia-kde",
+#         "kvantum-theme-materia",
+#         "xdg-desktop-portal",
+#         "xdg-desktop-portal-wlr"
+#       ]
